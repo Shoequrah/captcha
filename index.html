@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Generator</title>
+    <link rel="stylesheet" href="Captcha.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="status" id="_status">Captcha Generator</h2>
+        <div class="Generator-box">
+            <input type="text" readonly id="_ generator" class="generator">
+        </div>
+        <br>
+        <div class="your-chance">
+            <input type="text" class="client-text" id="_client-text"
+            placeholder="Enter the Captcha!!">
+        </div>
+        <br>
+        <button class="submit" id="submit" type="button">Submit</button>
+        <button class="refresh" id="refresh" type="button">Refresh</button>
+    </div>
+
+    <script>
+          
+        const display = document.getElementById("_status");
+        const body = document.body;
+        const submit = document.getElementById("submit");
+        const refresh = document.getElementById("refresh");
+
+        const char = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+        let Captcha = "";
+
+        body.onload = function generateCaptcha(){
+
+            const captchaLength = 6;
+            for (let i = 0; i <captchaLength; i++){
+                const randomIndex = Math.floor(Math.random() * char.length);
+                captcha += char.substring(randomIndex,randomIndex + 1)
+                
+            }
+
+            document.getElementById("_generator").value = captcha;
+            // display.innerText = "Captcha Generator"
+        }
+ 
+        submit.onclick = function submitButton(){
+            const input = document.getElementById("_client-text").value;
+
+            if(input === ""){
+                display.innerText = "Please enter the text shown below";
+            }else if(input === captcha){
+                display
+
+            }
+
+            } 
+
+        refresh.onclick = function refreshCaptcha(){
+
+            let newCaptcha = "";
+            for (let i = 0; i < captcha.length; i++) {
+                const randomChar = char[Math.floor(Math.random()* char.length)];
+                newCaptcha += randomChar;
+                
+            }
+            captcha = newCaptcha;
+            document.getElementById("_generator").value = captcha;
+        
+
+        }
+    </script>
+</body>
+</html>
